@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace OMS.Data
+namespace OMS.DataAccess.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {
