@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OMS.DataAccess.Data.Repository.IRepository
 {
-    interface IUnitOfWork
+    public interface IUnitOfWork
     {
     }
 }

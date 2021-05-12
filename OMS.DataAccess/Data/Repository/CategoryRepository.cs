@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OMS.DataAccess.Data.Repository
 {
-    class CategoryRepository
+    public class CategoryRepository
     {
     }
 }
