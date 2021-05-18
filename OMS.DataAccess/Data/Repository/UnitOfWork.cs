@@ -15,9 +15,11 @@ namespace OMS.DataAccess.Data.Repository
         {
             _db = db;
             Category = new CategoryRepository(_db);
+            Service = new ServiceRepository(_db);
         }
 
         public ICategoryRepository Category { get; private set; }
+        public IServiceRepository Service { get; private set; }
 
         public void Dispose()
         {
@@ -28,5 +30,9 @@ namespace OMS.DataAccess.Data.Repository
         {
             _db.SaveChanges();
         }
+
+      
+
+
     }
 }
