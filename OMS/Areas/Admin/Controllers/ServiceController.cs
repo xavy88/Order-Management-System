@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using OMS.DataAccess.Data.Repository.IRepository;
+using OMS.Models.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,22 @@ namespace OMS.Areas.Admin.Controllers
         public IActionResult Index()
         {
             return View();
+        }
+
+        public IActionResult Upsert(int? id)
+        {
+            ServiceVM serVM = new ServiceVM()
+            {
+                Service = new Models.Service(),
+                CategoryList= _unitOfWork.Category.GetCategoryListForDropDown(),
+            };
+
+            if (id!=null)
+            {
+                serVM.Service = _unitOfWork.Service.Get(id.GetValueOrDefault());
+            }
+
+            return View(serVM);
         }
 
         #region API Calls
