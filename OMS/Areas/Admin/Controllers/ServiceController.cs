@@ -4,6 +4,7 @@ using OMS.DataAccess.Data.Repository.IRepository;
 using OMS.Models.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -14,6 +15,9 @@ namespace OMS.Areas.Admin.Controllers
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IWebHostEnvironment _hostEnvironment;
+        
+        [BindProperty]
+        public ServiceVM SerVM { get; set; }
         public ServiceController(IUnitOfWork unitOfWork, IWebHostEnvironment hostEnvironment)
         {
             _unitOfWork = unitOfWork;
@@ -26,7 +30,7 @@ namespace OMS.Areas.Admin.Controllers
 
         public IActionResult Upsert(int? id)
         {
-            ServiceVM serVM = new ServiceVM()
+             SerVM = new ServiceVM()
             {
                 Service = new Models.Service(),
                 CategoryList= _unitOfWork.Category.GetCategoryListForDropDown(),
@@ -34,10 +38,73 @@ namespace OMS.Areas.Admin.Controllers
 
             if (id!=null)
             {
-                serVM.Service = _unitOfWork.Service.Get(id.GetValueOrDefault());
+                SerVM.Service = _unitOfWork.Service.Get(id.GetValueOrDefault());
             }
 
-            return View(serVM);
+            return View(SerVM);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+
+        public IActionResult Upsert()
+        {
+            if (ModelState.IsValid)
+            {
+                string webRootPath = _hostEnvironment.WebRootPath;
+                var files = HttpContext.Request.Form.Files;
+                if (SerVM.Service.Id==0)
+                {
+                    //New Service
+                    string fileName = Guid.NewGuid().ToString();
+                    var uploads = Path.Combine(webRootPath, @"images\product");
+                    var extension = Path.GetExtension(files[0].FileName);
+
+                    using(var fileStreams = new FileStream(Path.Combine(uploads,fileName+extension),FileMode.Create))
+                    {
+                        files[0].CopyTo(fileStreams);
+                    }
+
+                    SerVM.Service.ImageUrl = @"\images\services\" + fileName + extension;
+
+                    _unitOfWork.Service.Add(SerVM.Service);
+                }
+                else
+                {
+                    //Edit Services
+                    var serviceFromDb = _unitOfWork.Service.Get(SerVM.Service.Id);
+                    if (files.Count>0)
+                    {
+                        string fileName = Guid.NewGuid().ToString();
+                        var uploads = Path.Combine(webRootPath, @"images\product");
+                        var extension_new = Path.GetExtension(files[0].FileName);
+
+                        var imagePath = Path.Combine(webRootPath, serviceFromDb.ImageUrl.TrimStart('\\'));
+                        if (System.IO.File.Exists(imagePath))
+                        {
+                            System.IO.File.Delete(imagePath);
+                        }
+                        using (var fileStreams = new FileStream(Path.Combine(uploads, fileName + extension_new), FileMode.Create))
+                        {
+                            files[0].CopyTo(fileStreams);
+                        }
+
+                        SerVM.Service.ImageUrl = @"\images\product\" + fileName + extension_new;
+                    }
+                    else
+                    {
+                        SerVM.Service.ImageUrl = serviceFromDb.ImageUrl;
+                    }
+
+                    _unitOfWork.Service.Update(SerVM.Service);
+                }
+                _unitOfWork.Save();
+                return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+                return View(SerVM);
+            }
         }
 
         #region API Calls
