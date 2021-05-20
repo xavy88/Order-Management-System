@@ -18,11 +18,11 @@ namespace OMS.Controllers
         private HomeVM HomeVM;
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger,IUnitOfWork unitOfWork, HomeVM homeVM)
+        public HomeController(ILogger<HomeController> logger,IUnitOfWork unitOfWork)
         {
             _logger = logger;
             _unitOfWork = unitOfWork;
-            HomeVM = homeVM;
+            
         }
 
         public IActionResult Index()
