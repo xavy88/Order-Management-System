@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace OMS.Models.ViewModel
 {
-    class HomeVM
+    public class HomeVM
     {
+        public IEnumerable<Category> CategoryList { get; set; }
+        public IEnumerable<Service> ServiceList { get; set; }
+
     }
 }
