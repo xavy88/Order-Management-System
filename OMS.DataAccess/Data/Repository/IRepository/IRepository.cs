@@ -19,7 +19,7 @@ namespace OMS.DataAccess.Data.Repository.IRepository
 
         T GetFirstOrDefault(
            Expression<Func<T, bool>> filter = null,
-           string incluideProperties = null
+           string includeProperties = null
            );
 
         void Add(T entity);

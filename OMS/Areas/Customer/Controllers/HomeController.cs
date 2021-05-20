@@ -35,6 +35,12 @@ namespace OMS.Controllers
             return View(HomeVM);
         }
 
+        public IActionResult Details(int id)
+        {
+            var servicesFromDB = _unitOfWork.Service.GetFirstOrDefault(includeProperties: "Category",filter:c=>c.Id==id);
+            return View(servicesFromDB);
+        }
+
         public IActionResult Privacy()
         {
             return View();
