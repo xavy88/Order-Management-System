@@ -10,6 +10,8 @@ namespace OMS.DataAccess.Data.Repository.IRepository
     {
         ICategoryRepository Category { get; }
         IServiceRepository Service { get; }
+        IOrderHeaderRepository OrderHeader { get; }
+        IOrderDetailsRepository OrderDetails { get; }
         void Save();
     }
 }
