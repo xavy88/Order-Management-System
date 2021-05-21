@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace OMS.Areas.Customer.Controllers
 {
+    [Area("Customer")]
     public class CartController : Controller
     {
         public IActionResult Index()
