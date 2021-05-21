@@ -1,8 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using OMS.DataAccess.Data.Repository.IRepository;
+using OMS.Extensions;
 using OMS.Models;
 using OMS.Models.ViewModel;
+using OMS.Utility;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -39,6 +42,27 @@ namespace OMS.Controllers
         {
             var servicesFromDB = _unitOfWork.Service.GetFirstOrDefault(includeProperties: "Category",filter:c=>c.Id==id);
             return View(servicesFromDB);
+        }
+
+        public IActionResult AddToCart(int serviceId)
+        {
+            List<int> sessionList = new List<int>();
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString(SD.SessionCart)))
+            {
+                sessionList.Add(serviceId);
+                HttpContext.Session.SetObject(SD.SessionCart, sessionList);
+            }
+            else
+            {
+                sessionList = HttpContext.Session.GetObject<List<int>>(SD.SessionCart);
+                if (!sessionList.Contains(serviceId))
+                {
+                    sessionList.Add(serviceId);
+                    HttpContext.Session.SetObject(SD.SessionCart, sessionList);
+                }
+            }
+
+            return RedirectToAction(nameof(Index));
         }
 
         public IActionResult Privacy()

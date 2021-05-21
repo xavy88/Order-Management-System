@@ -10,6 +10,7 @@ using OMS.DataAccess.Data;
 using OMS.DataAccess.Data.Repository;
 using OMS.DataAccess.Data.Repository.IRepository;
 using OMS.Utility;
+using System;
 
 namespace OMS
 {
@@ -37,6 +38,14 @@ namespace OMS
             services.AddSingleton<IEmailSender, EmailSender>();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
+
             services.AddControllersWithViews().AddNewtonsoftJson().AddRazorRuntimeCompilation();
             services.AddRazorPages();
         }
@@ -57,6 +66,8 @@ namespace OMS
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            app.UseSession();
 
             app.UseRouting();
 
