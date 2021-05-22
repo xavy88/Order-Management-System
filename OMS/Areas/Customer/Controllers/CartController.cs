@@ -41,5 +41,15 @@ namespace OMS.Areas.Customer.Controllers
             }
             return View(CartVM);
         }
+
+        public IActionResult Remove (int serviceId)
+        {
+            List<int> sessionList = new List<int>();
+            sessionList = HttpContext.Session.GetObject<List<int>>(SD.SessionCart);
+            sessionList.Remove(serviceId);
+            HttpContext.Session.SetObject(SD.SessionCart, sessionList);
+
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
