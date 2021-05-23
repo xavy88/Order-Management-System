@@ -8,10 +8,9 @@ using System.Threading.Tasks;
 
 namespace OMS.DataAccess.Data.Repository.IRepository
 {
-    public interface ICategoryRepository:IRepository<Category>
+    public interface IUserRepository : IRepository<ApplicationUser>
     {
-        IEnumerable<SelectListItem> GetCategoryListForDropDown();
-        void Update(Category category);
-
+        void LockUser(string userId);
+        void UnlockUser(string userId);
     }
 }
