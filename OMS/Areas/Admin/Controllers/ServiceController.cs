@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using OMS.DataAccess.Data.Repository.IRepository;
 using OMS.Models.ViewModel;
+using OMS.Utility;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -10,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace OMS.Areas.Admin.Controllers
 {
+    [Authorize(Roles =SD.Admin + ","+SD.Manager)]
     [Area("Admin")]
     public class ServiceController : Controller
     {

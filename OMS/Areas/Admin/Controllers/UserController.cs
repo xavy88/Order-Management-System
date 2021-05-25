@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using OMS.DataAccess.Data.Repository.IRepository;
+using OMS.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace OMS.Areas.Admin.Controllers
 {
+    [Authorize(Roles =SD.Admin)]
     [Area("Admin")]
     public class UserController : Controller
     {
