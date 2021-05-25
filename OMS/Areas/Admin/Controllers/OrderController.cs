@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OMS.DataAccess.Data.Repository.IRepository;
+using OMS.Models.ViewModel;
 using OMS.Utility;
 using System;
 using System.Collections.Generic;
@@ -22,6 +23,16 @@ namespace OMS.Areas.Admin.Controllers
             return View();
         }
 
+        public IActionResult Details(int id)
+        {
+            OrderVM orderVM = new OrderVM()
+            {
+                OrderHeader = _unitOfWork.OrderHeader.Get(id),
+                OrderDetails = _unitOfWork.OrderDetails.GetAll(filter: o => o.OrderHeaderId == id)
+            };
+
+            return View(orderVM);
+        }
 
         #region API Calls
         public IActionResult GetAllOrders()
