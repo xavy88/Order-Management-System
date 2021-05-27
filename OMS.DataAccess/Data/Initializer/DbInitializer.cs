@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using OMS.Models;
 using OMS.Utility;
 using System;
 using System.Collections.Generic;
@@ -42,16 +43,17 @@ namespace OMS.DataAccess.Data.Initializer
             _roleManager.CreateAsync(new IdentityRole(SD.Manager)).GetAwaiter().GetResult();
             _roleManager.CreateAsync(new IdentityRole(SD.User)).GetAwaiter().GetResult();
 
-            _userManager.CreateAsync(new IdentityUser
+            _userManager.CreateAsync(new ApplicationUser
             {
                 UserName = "admin@gmail.com",
                 Email = "admin@gmail.com",
                 EmailConfirmed = true,
-                PhoneNumber = "111111111"
+                PhoneNumber = "111111111",
+                Name= "root"
 
             }, "P@ssword1").GetAwaiter().GetResult();
 
-            IdentityUser user = _db.Users.Where(u => u.Email == "admin@gmail.com").FirstOrDefault();
+            ApplicationUser user = _db.ApplicationUser.Where(u => u.Email == "admin@gmail.com").FirstOrDefault();
             _userManager.AddToRoleAsync(user, SD.Admin).GetAwaiter().GetResult();
         }
     }

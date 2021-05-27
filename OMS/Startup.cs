@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using OMS.DataAccess.Data;
+using OMS.DataAccess.Data.Initializer;
 using OMS.DataAccess.Data.Repository;
 using OMS.DataAccess.Data.Repository.IRepository;
 using OMS.Utility;
@@ -38,6 +39,7 @@ namespace OMS
             services.AddSingleton<IEmailSender, EmailSender>();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IDbInitializer, DbInitializer>();
 
             services.AddSession(options =>
             {
@@ -63,7 +65,7 @@ namespace OMS
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IDbInitializer dbInit)
         {
             if (env.IsDevelopment())
             {
@@ -82,7 +84,7 @@ namespace OMS
             app.UseSession();
 
             app.UseRouting();
-
+            dbInit.Initialize();
             app.UseAuthentication();
             app.UseAuthorization();
 
