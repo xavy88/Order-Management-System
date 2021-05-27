@@ -102,12 +102,12 @@ namespace OMS.Areas.Identity.Pages.Account
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
-                    if (!await _roleManager.RoleExistsAsync(SD.Admin))
-                    {
-                        await _roleManager.CreateAsync(new IdentityRole(SD.Admin));
-                        await _roleManager.CreateAsync(new IdentityRole(SD.Manager));
-                        await _roleManager.CreateAsync(new IdentityRole(SD.User));
-                    }
+                    //if (!await _roleManager.RoleExistsAsync(SD.Admin))
+                    //{
+                    //    await _roleManager.CreateAsync(new IdentityRole(SD.Admin));
+                    //    await _roleManager.CreateAsync(new IdentityRole(SD.Manager));
+                    //    await _roleManager.CreateAsync(new IdentityRole(SD.User));
+                    //}
 
                     string role = Request.Form["rdUserRole"].ToString();
 
