@@ -22,12 +22,12 @@ function loadDataTable() {
                 "render": function (data) {
 
                     return `<div class="text-center"> 
-                            <a href="/Admin/service/Upsert/${data}" class='btn btn-success text-white' style='cursor:pointer; width:100px;' >
-                                <i class='far fa-edit'></i> Edit
+                            <a href="/Admin/service/Upsert/${data}" class='btn btn-success text-white' style='cursor:pointer; width:40px;' >
+                                <i class='far fa-edit'></i>
                             </a>
                             &nbsp;
-                            <a class='btn btn-danger text-white' style='cursor:pointer; width:100px;' onclick=Delete('/admin/service/Delete/'+${data})>
-                               <i class='far fa-trash-alt'></i> Delete
+                            <a class='btn btn-danger text-white' style='cursor:pointer; width:40px;' onclick=Delete('/admin/service/Delete/'+${data})>
+                               <i class='far fa-trash-alt'></i>
                             </a></div>
                         `;
                 }, "width": "30%"

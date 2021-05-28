@@ -34,8 +34,8 @@ function loadDataTable(url) {
                 "data": "id",
                 "render": function (data) {
                     return `<div class="text-center">
-                                <a href="/Admin/order/Details/${data}" class='btn btn-success text-white' style='cursor:pointer; width:100px;'>
-                                    <i class='far fa-edit'></i> Details
+                                <a href="/Admin/order/Details/${data}" class='btn btn-success text-white' style='cursor:pointer; width:40px;'>
+                                    <i class="fas fa-folder-open"></i>
                                 </a>
                                 
                                 

@@ -14,6 +14,7 @@ namespace OMS.Models
         [Required]
         [Display(Name ="Category Name")]
         public string Name { get; set; }
+        [Display(Name = "Is Active?")]
         public bool Status { get; set; } = true;
     }
 }
