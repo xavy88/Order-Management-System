@@ -8,9 +8,10 @@
 
 <div class="login-form pt-4">
     <form id="account" method="post">
-        <h2 class="text-center text-success"><b>Log in</b></h2>
+        <img src="~/images/Logo.png" class="img-responisve mx-auto d-block" width="150px" height="150px"/>
+        <h2 class="text-center text-success"><b style="color:#33364D;">Log in</b></h2>
         <div class="form-group">
-            <input asp-for="Input.Email" placeholder="Email..." class="form-control" />
+            <input asp-for="Input.Email" placeholder="Email..." class="form-control" autofocus/>
             <span asp-validation-for="Input.Email" class="text-danger"></span>
         </div>
         <div class="form-group">
@@ -18,10 +19,10 @@
             <span asp-validation-for="Input.Password" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <button type="submit" class="btn btn-success btn-block">Log in</button>
+            <button type="submit" class="btn btn-success btn-block" style="background-color:#33364D;" ><i class="fas fa-sign-in-alt"></i> Log in</button>
         </div>
         <div class="text-center">
-            <a id="forgot-password" style="text-decoration:none;" asp-page="./ForgotPassword">Forgot your password?</a>
+            <a id="forgot-password" style="text-decoration:none;color:#33364D;" asp-page="./ForgotPassword">Forgot your password?</a>
         </div>
     </form>
 </div>
