@@ -68,7 +68,7 @@ namespace OMS.Areas.Admin.Controllers
                         files[0].CopyTo(fileStreams);
                     }
 
-                    SerVM.Service.ImageUrl = @"\images\services\" + fileName + extension;
+                    SerVM.Service.ImageUrl = @"\images\product\" + fileName + extension;
 
                     _unitOfWork.Service.Add(SerVM.Service);
                 }

@@ -76,10 +76,12 @@ body {
 
 .search-background {
     background: url('/images/dust_scratches.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .backgroundWhite {
-    background-color: white;
+    background-color: #ffffffc9;
     padding: 30px;
     border-radius: 10px;
     margin-bottom: 30px;

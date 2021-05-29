@@ -13,9 +13,9 @@ function loadDataTable() {
             "datatype": "json"
         },
         "columns": [
-            { "data": "name", "width": "20%" },
-            { "data": "category.name", "width": "20%" },
-            { "data": "price", "width": "15%" },
+            { "data": "name", "width": "40%" },
+            { "data": "category.name", "width": "30%" },
+            { "data": "price", "width": "10%" },
             
             {
                 "data": "id",
@@ -30,7 +30,7 @@ function loadDataTable() {
                                <i class='far fa-trash-alt'></i>
                             </a></div>
                         `;
-                }, "width": "30%"
+                }, "width": "10%"
             }
 
 

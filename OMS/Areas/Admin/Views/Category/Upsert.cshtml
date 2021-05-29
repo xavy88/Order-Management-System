@@ -16,7 +16,7 @@
         }
 
         <div class="col-12">
-            <h2 class="text-primary">@title</h2>
+            <h2 class="text-primary"><i class="fas fa-biking"></i> @title</h2>
             <br />
         </div>
         <div class="col-8">
@@ -25,7 +25,7 @@
                     <label asp-for="Name"></label>
                 </div>
                 <div class="col-8">
-                    <input asp-for="Name" class="form-control" />
+                    <input asp-for="Name" class="form-control" autofocus />
                     <span asp-validation-for="Name" class="text-danger"></span>
                 </div>
             </div>
