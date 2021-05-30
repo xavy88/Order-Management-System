@@ -5,26 +5,25 @@
 
 }
 
-<h1>Register New User</h1>
-
 <div class="row backgroundWhite border">
     <div class="col-md-12">
         <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
-            <h4>Create a new account.</h4>
+            <h4 class="text-primary"><i class="fas fa-users-cog"></i> Create a new account.</h4>
             <hr />
             <div asp-validation-summary="All" class="text-danger"></div>
+
             <div class="form-group row">
-                <div class="col-3">
+                <div class="col-2">
                     <label asp-for="Input.Name"></label>
 
                 </div>
                 <div class="col-5">
-                    <input asp-for="Input.Name" class="form-control" />
+                    <input asp-for="Input.Name" class="form-control" autofocus/>
                     <span asp-validation-for="Input.Name" class="text-danger"></span>
                 </div>
             </div>
             <div class="form-group row">
-                <div class="col-3">
+                <div class="col-2">
                     <label asp-for="Input.Email"></label>
 
                 </div>
@@ -34,7 +33,7 @@
                 </div>
             </div>
             <div class="form-group row">
-                <div class="col-3">
+                <div class="col-2">
                     <label asp-for="Input.PhoneNumber"></label>
 
                 </div>
@@ -44,7 +43,7 @@
                 </div>
             </div>
             <div class="form-group row">
-                <div class="col-3">
+                <div class="col-2">
                     <label asp-for="Input.Address"></label>
 
                 </div>
@@ -54,7 +53,7 @@
                 </div>
             </div>
             <div class="form-group row">
-                <div class="col-3">
+                <div class="col-2">
                     <label asp-for="Input.City"></label>
 
                 </div>
@@ -64,7 +63,7 @@
                 </div>
             </div>
             <div class="form-group row">
-                <div class="col-3">
+                <div class="col-2">
                     <label asp-for="Input.CardId"></label>
 
                 </div>
@@ -74,7 +73,7 @@
                 </div>
             </div>
             <div class="form-group row">
-                <div class="col-3">
+                <div class="col-2">
                     <label asp-for="Input.Password"></label>
 
                 </div>
@@ -84,7 +83,7 @@
                 </div>
             </div>
             <div class="form-group row">
-                <div class="col-3">
+                <div class="col-2">
                     <label asp-for="Input.ConfirmPassword"></label>
 
                 </div>
@@ -94,7 +93,7 @@
                 </div>
             </div>
             <div class="form-group row">
-                <div class="col-3"></div>
+                <div class="col-2"></div>
                 <div class="col-5">
                     <input type="radio" name="rdUserRole" value="@SD.Admin" checked /> @SD.Admin
                     <input type="radio" name="rdUserRole" value="@SD.Manager" /> @SD.Manager
@@ -102,15 +101,18 @@
                 </div>
             </div>
             <div class="form-group row">
-                <div class="col-5 offset-3">
-                    <button type="submit" class="btn btn-primary form-control">Register</button>
+                <div class="col-5 offset-2">
+                    <button type="submit" class="btn btn-primary form-control"><i class="fas fa-user-plus"></i> Register</button>
                 </div>
-            </div>
 
+            </div>
+            
         </form>
+        
     </div>
 
 </div>
+
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

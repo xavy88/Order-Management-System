@@ -18,7 +18,7 @@
                         <i class="fas fa-shopping-cart"></i> &nbsp; Order Summary
                     </div>
                     <div class="col-12 col-md-4 offset-md-2 text-right">
-                        <a asp-action="Index" asp-controller="Order" asp-area="Admin" class="btn btn-outline-info form-control btn-sm">Back to Orders</a>
+                        <a asp-action="Index" asp-controller="Order" asp-area="Admin" class="btn btn-outline-info form-control btn-sm"><i class="fas fa-undo"></i> Back to Orders</a>
                     </div>
                 </div>
                 <div class="card-body">
@@ -27,7 +27,7 @@
                             <div class="col-12 col-lg-6 pb-4">
                                 <div class="row">
                                     <h4 class="d-flex justify-content-between align-items-center mb-3">
-                                        <span class="text-primary">PickUp Details:</span>
+                                        <span class="text-primary"><i class="fas fa-truck-moving"></i> PickUp Details:</span>
                                     </h4>
                                 </div>
                                 <div class="row my-1">
@@ -51,7 +51,7 @@
                                         <label>Address</label>
                                     </div>
                                     <div class="col-9">
-                                        <input asp-for="OrderHeader.Address" type="text" readonly class="form-control" />
+                                        <textarea asp-for="OrderHeader.Address" type="text" readonly class="form-control"></textarea>
                                     </div>
                                 </div>
                                 <div class="row my-1">
@@ -81,7 +81,7 @@
                             </div>
                             <div class="col-12 col-lg-5 offset-lg-1">
                                 <h4 class="d-flex justify-content-between align-items-center mb-3">
-                                    <span class="text-primary">Order Summary</span>
+                                    <span class="text-primary"><i class="far fa-file"></i> Order Summary</span>
                                 </h4>
                                 <ul class="list-group mb-3">
                                     @{ var total = 0.0;}
@@ -116,10 +116,10 @@
                         @if (Model.OrderHeader.Status != SD.StatusApproved && Model.OrderHeader.Status != SD.StatusRejected)
                         {
                             <div class="col-6 offset-md-4 col-md-4 col-lg-2 offset-lg-8">
-                                <a asp-action="Approve" asp-route-id="@Model.OrderHeader.Id" class="btn btn-success form-control">Approve</a>
+                                <a asp-action="Approve" asp-route-id="@Model.OrderHeader.Id" class="btn btn-success form-control"><i class="fas fa-check-circle"></i> Approve</a>
                             </div>
                             <div class="col-6 col-md-4 col-lg-2">
-                                <a asp-action="reject" asp-route-id="@Model.OrderHeader.Id" class="btn btn-danger form-control">Reject</a>
+                                <a asp-action="reject" asp-route-id="@Model.OrderHeader.Id" class="btn btn-danger form-control"><i class="far fa-times-circle"></i> Reject</a>
                             </div>
                         }
                     </div>
