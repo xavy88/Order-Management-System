@@ -67,6 +67,17 @@ namespace OMS.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        public IActionResult List()
+        {
+            HomeVM = new HomeVM()
+            {
+                CategoryList = _unitOfWork.Category.GetAll(),
+                ServiceList = _unitOfWork.Service.GetAll()
+            };
+
+            return View(HomeVM);
+        }
+
         public IActionResult Privacy()
         {
             return View();

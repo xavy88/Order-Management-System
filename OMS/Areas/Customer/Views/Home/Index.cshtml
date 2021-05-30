@@ -1,5 +1,6 @@
 ﻿@model OMS.Models.ViewModel.HomeVM
 
+
 @foreach (var category in Model.CategoryList.OrderBy(o => o.Name))
 {
     @if (Model.ServiceList.Where(c => c.CategoryId == category.Id).Count() > 0)
@@ -26,6 +27,8 @@
 
                                         <div class="text-primary text-center pb-2 h5">@service.Category.Name</div>
                                         <a asp-action="Details" class="btn btn-success" style="border-radius:2px;background-color:midnightblue;" asp-route-id="@service.Id">Details</a>
+
+                                       
                                     </div>
                                 </div>
                             }

@@ -1,0 +1,101 @@
+﻿@model OMS.Models.ViewModel.HomeVM
+@using OMS.Utility
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+@using OMS.Extensions
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<br />
+<div class="border backgroundWhite">
+    <div class="row">
+        <div class="col-6">
+            <h2 class="text-info">Product List</h2>
+        </div>
+        @*<div class="col-6 text-right">
+            <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-info">
+                <i class="fas fa-plus"></i> &nbsp; New User Registration
+            </a>
+        </div>*@
+    </div>
+
+    <br />
+    @if (Model != null)
+    {
+
+        <table id="dt" class="table table-striped table-bordered" style="width:100%">
+            <thead>
+                <tr>
+                    <th>
+                        Product
+                    </th>
+                    <th>
+                        Price
+                    </th>
+                    <th>
+                        Category
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var Service in Model.ServiceList)
+                {
+
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(m => Service.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => Service.Price)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => Service.Category.Name)
+                        </td>
+                        <td>
+                            <a asp-action="Details" class="btn btn-success" style="border-radius:2px;background-color:midnightblue;" asp-route-id="@Service.Id"><i class="fas fa-info-circle"></i></a>
+                            @{
+                                var AddToCartEnabled = true;
+
+                                if (HttpContextAccessor.HttpContext.Session.GetObject<List<int>>(SD.SessionCart) != null)
+                                {
+                                    var sessionList = HttpContextAccessor.HttpContext.Session.GetObject<List<int>>(SD.SessionCart);
+                                    if (sessionList.Contains(@Service.Id))
+                                    {
+                                        AddToCartEnabled = false;
+                                    }
+                                }
+                            }
+                           
+                            @if (AddToCartEnabled)
+                            {
+                                <a asp-action="AddToCart" asp-route-serviceId="@Service.Id" class="btn btn-primary" ><i class="fas fa-cart-plus"></i></a>
+                            }
+                            else
+                            {
+                                <button class="btn btn-primary" disabled><i class="fas fa-hand-paper"></i></button>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>No Products Exists...</p>
+    }
+
+</div>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $('#dt').DataTable();
+        });
+    </script>
+}
