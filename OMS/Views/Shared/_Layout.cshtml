@@ -15,14 +15,39 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css" />
 </head>
-<body class="search-background">
-    <header>
+<body id="body-pd" class="search-background">
+    <header class="header mb-5" id="header">
+        <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
+        @if (HttpContextAccesor.HttpContext.Session.GetObject<List<int>>(SD.SessionCart) != null)
+        {
 
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            
+            <a asp-area="customer" asp-controller="Cart" asp-action="Index" class="nav-link header_img"style="color: #191970; margin-left: -50em;">
+                @{
+                    var count = HttpContextAccesor.HttpContext.Session.GetObject<List<int>>(SD.SessionCart).Count;
+                }
+                <i class="fas fa-shopping-cart"></i><span style="color: #191970; position: fixed; margin-top: -1.5em; ">&nbsp;&nbsp;&nbsp;&nbsp; (@count)</span>
+</a>
+
+        }
+        else
+        {
+
+    <a href="#" class="nav-link" style="color: #191970; margin-left: -50em;">
+        <i class="fas fa-shopping-cart"></i><span style="color: #191970; position: fixed; margin-top: 0em;">&nbsp;&nbsp;&nbsp;&nbsp;  (0)</span>
+</a>
+
+
+        }
+
+        <partial name="_LoginPartial" class="text-success" />
+        <!--<div class="header_img"> <img src="~/images/Logo.png" alt="logo"> </div>-->
+        @*<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
             <div class="container-fluid">
-                
+
                 <a class="navbar-brand" asp-area="Customer" asp-controller="Home" asp-action="Index">OMS</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -30,7 +55,7 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarColor02">
-                    
+
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
                             <a class="nav-link text-white" asp-area="Customer" asp-controller="Home" asp-action="Index">Home</a>
@@ -84,20 +109,56 @@
                 </div>
             </div>
             <partial name="_LoginPartial" class="text-white" />
-          
-        </nav>
-       
+
+        </nav>*@
+
 
     </header>
-    <div class="container my-3">
+    <!--Sidebar menu-->
+    <div class="l-navbar" id="nav-bar">
+        <nav class="nav">
+            <div>
+                <!-- <img src="~/images/Logo.png" alt="logo" width="50px" height="50px">-->
+                <a href="#" class="nav_logo"> <i class='bx bx-layer nav_logo-icon'></i> <span class="nav_logo-name"></span> </a>
+             
+                <div class="nav_list">
+                    <a href="#" class="nav_link active">
+                        <i class='bx bx-grid-alt nav_icon'></i>
+                        <span class="nav_name ">Dashboard</span>
+                    </a>
+                   
+                        <a class="nav_link" asp-area="Customer" asp-controller="Home" asp-action="Index"> <i class='bx bx-home nav_icon'></i> <span class="nav_name">Home</span> </a>
+                        <a class="nav_link" asp-area="Customer" asp-controller="Home" asp-action="List"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">List</span> </a>
+                        @if (User.IsInRole(SD.Manager) || User.IsInRole(SD.Admin))
+                        {
+                            <a class="nav_link" asp-area="Admin" asp-controller="Category" asp-action="Index"> <i class='bx bx-category nav_icon'></i> <span class="nav_name">Categories</span> </a>
+                            <a class="nav_link" asp-area="Admin" asp-controller="Service" asp-action="Index"> <i class='bx bxs-car-mechanic nav_icon'></i> <span class="nav_name">Products</span> </a>
+                            <a class="nav_link" asp-area="Admin" asp-controller="Order" asp-action="Index"> <i class='bx bxs-credit-card-alt nav_icon'></i> <span class="nav_name">Orders</span> </a>
+                        }
+
+                        @if (User.IsInRole(SD.Admin))
+                        {
+                            <a class="nav_link" asp-area="Admin" asp-controller="User" asp-action="Index"> <i class='bx bx-user nav_icon'></i> <span class="nav_name">Users</span> </a>
+                        }
+                        @*<a href="#" class="nav_link"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">Stats</span> </a>
+                        <a href="#" class="nav_link"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">Stats</span> </a>
+                        <a href="#" class="nav_link"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">Stats</span> </a>*@
+                    </div>
+                </div>
+            @*<a href="#" class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">SignOut</span> </a>
+            <a href="#" class="nav_link"> <i class='bx bx-log-in nav_icon'></i> <span class="nav_name"></span> </a>*@
+        </nav>
+    </div>
+    <!--End Sidebar menu-->
+    <div class="container my-3"style="padding-top: 2em; padding-bottom: 2em;">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container text-white">
-           <b> &copy; 2021 - OMS </b><a asp-area="" asp-controller="Home" asp-action="Privacy"></a>
+    <footer style="padding-top: 2em;">
+        <div class="container text-white border-top footer">
+            <b> &copy; 2021 - OMS </b><a asp-area="" asp-controller="Home" asp-action="Privacy"></a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
@@ -109,6 +170,7 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
     <script src="https://kit.fontawesome.com/e19c476714.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

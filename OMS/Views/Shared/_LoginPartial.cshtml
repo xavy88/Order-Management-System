@@ -3,15 +3,15 @@
 @inject UserManager<IdentityUser> UserManager
 @using OMS.Utility
 
-<ul class="navbar-nav">
+<ul class="navbar-nav" style="display: -webkit-box;">
     @if (SignInManager.IsSignedIn(User))
     {
         <li class="nav-item">
-            <a class="nav-link text-white" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"><i class="fas fa-user-ninja"></i> @User.Identity.Name!</a>
+            <a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage" style="color: #191970;"><i class="fas fa-user-ninja"></i> @User.Identity.Name! &nbsp; </a>
         </li>
         <li class="nav-item">
             <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                <button type="submit" class="nav-link btn btn-link text-white"><i class="fas fa-door-open"></i></button>
+                <button type="submit" class="nav-link btn btn-link" style="color: #191970;"><i class="fas fa-door-open"></i></button>
             </form>
         </li>
     }
@@ -20,11 +20,11 @@
         @if (User.IsInRole(SD.Admin))
         {
             <li class="nav-item">
-                <a class="nav-link text-white" asp-area="Identity" asp-page="/Account/Register"><i class="fas fa-user-plus"></i></a>
+                <a class="nav-link text-success" asp-area="Identity" asp-page="/Account/Register"><i class="fas fa-user-plus"></i></a>
             </li>
         }
             <li class="nav-item">
-                <a class="nav-link text-white" asp-area="Identity" asp-page="/Account/Login"><i class="fas fa-sign-in-alt"></i></a>
+                <a class="nav-link" style="color: #191970;" asp-area="Identity" asp-page="/Account/Login"><i class="fas fa-sign-in-alt"></i></a>
             </li>
         }
     </ul>
