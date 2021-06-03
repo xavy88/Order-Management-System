@@ -24,93 +24,26 @@
         @if (HttpContextAccesor.HttpContext.Session.GetObject<List<int>>(SD.SessionCart) != null)
         {
 
-            <a asp-area="customer" asp-controller="Cart" asp-action="Index" class="nav-link header_img"style="color: #191970; margin-left: -50em;">
+            <a asp-area="customer" asp-controller="Cart" asp-action="Index" class="nav-link header_img" style="color: #191970; margin-left: -50em;">
                 @{
                     var count = HttpContextAccesor.HttpContext.Session.GetObject<List<int>>(SD.SessionCart).Count;
                 }
                 <i class="fas fa-shopping-cart"></i><span style="color: #191970; position: fixed; margin-top: -1.5em; ">&nbsp;&nbsp;&nbsp;&nbsp; (@count)</span>
-</a>
+            </a>
 
         }
         else
         {
 
-    <a href="#" class="nav-link" style="color: #191970; margin-left: -50em;">
-        <i class="fas fa-shopping-cart"></i><span style="color: #191970; position: fixed; margin-top: 0em;">&nbsp;&nbsp;&nbsp;&nbsp;  (0)</span>
-</a>
+            <a href="#" class="nav-link" style="color: #191970; margin-left: -50em;">
+                <i class="fas fa-shopping-cart"></i><span style="color: #191970; position: fixed; margin-top: 0em;">&nbsp;&nbsp;&nbsp;&nbsp;  (0)</span>
+            </a>
 
 
         }
 
         <partial name="_LoginPartial" class="text-success" />
-        <!--<div class="header_img"> <img src="~/images/Logo.png" alt="logo"> </div>-->
-        @*<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 
-            <div class="container-fluid">
-
-                <a class="navbar-brand" asp-area="Customer" asp-controller="Home" asp-action="Index">OMS</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarColor02">
-
-                    <ul class="navbar-nav me-auto">
-                        <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="Customer" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="Customer" asp-controller="Home" asp-action="List">Lists</a>
-                        </li>
-                        @if (User.IsInRole(SD.Manager) || User.IsInRole(SD.Admin))
-                        {
-
-
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropDown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Content Management
-                                </a>
-                                <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropDown">
-                                    <a class="dropdown-item text-white bg-dark" asp-area="Admin" asp-controller="Category" asp-action="Index">Category</a>
-                                    <a class="dropdown-item text-white bg-dark" asp-area="Admin" asp-controller="Service" asp-action="Index">Product</a>
-                                    @if (User.IsInRole(SD.Admin))
-                                    {
-                                        <a class="dropdown-item text-white bg-dark" asp-area="Admin" asp-controller="User" asp-action="Index">Users</a>
-                                    }
-                                    <a class="dropdown-item text-white bg-dark" asp-area="Admin" asp-controller="Order" asp-action="Index">Orders</a>
-                                </div>
-                            </li>
-                        }
-
-                        @if (HttpContextAccesor.HttpContext.Session.GetObject<List<int>>(SD.SessionCart) != null)
-                        {
-                            <li style="color:white">
-                                <a asp-area="customer" asp-controller="Cart" asp-action="Index" class="nav-link text-white">
-                                    @{
-                                        var count = HttpContextAccesor.HttpContext.Session.GetObject<List<int>>(SD.SessionCart).Count;
-                                    }
-                                    <i class="fas fa-shopping-cart"></i>&nbsp; (@count)
-                                </a>
-                            </li>
-                        }
-                        else
-                        {
-                            <li style="color:white">
-                                <a href="#" class="nav-link text-white">
-
-                                    <i class="fas fa-shopping-cart"></i>&nbsp; (0)
-                                </a>
-                            </li>
-
-                        }
-                    </ul>
-
-                </div>
-            </div>
-            <partial name="_LoginPartial" class="text-white" />
-
-        </nav>*@
 
 
     </header>
@@ -118,39 +51,34 @@
     <div class="l-navbar" id="nav-bar">
         <nav class="nav">
             <div>
-                <!-- <img src="~/images/Logo.png" alt="logo" width="50px" height="50px">-->
                 <a href="#" class="nav_logo"> <i class='bx bx-layer nav_logo-icon'></i> <span class="nav_logo-name"></span> </a>
-             
                 <div class="nav_list">
                     <a href="#" class="nav_link active">
                         <i class='bx bx-grid-alt nav_icon'></i>
                         <span class="nav_name ">Dashboard</span>
                     </a>
-                   
-                        <a class="nav_link" asp-area="Customer" asp-controller="Home" asp-action="Index"> <i class='bx bx-home nav_icon'></i> <span class="nav_name">Home</span> </a>
-                        <a class="nav_link" asp-area="Customer" asp-controller="Home" asp-action="List"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">List</span> </a>
-                        @if (User.IsInRole(SD.Manager) || User.IsInRole(SD.Admin))
-                        {
-                            <a class="nav_link" asp-area="Admin" asp-controller="Category" asp-action="Index"> <i class='bx bx-category nav_icon'></i> <span class="nav_name">Categories</span> </a>
-                            <a class="nav_link" asp-area="Admin" asp-controller="Service" asp-action="Index"> <i class='bx bxs-car-mechanic nav_icon'></i> <span class="nav_name">Products</span> </a>
-                            <a class="nav_link" asp-area="Admin" asp-controller="Order" asp-action="Index"> <i class='bx bxs-credit-card-alt nav_icon'></i> <span class="nav_name">Orders</span> </a>
-                        }
 
-                        @if (User.IsInRole(SD.Admin))
-                        {
-                            <a class="nav_link" asp-area="Admin" asp-controller="User" asp-action="Index"> <i class='bx bx-user nav_icon'></i> <span class="nav_name">Users</span> </a>
-                        }
-                        @*<a href="#" class="nav_link"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">Stats</span> </a>
-                        <a href="#" class="nav_link"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">Stats</span> </a>
-                        <a href="#" class="nav_link"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">Stats</span> </a>*@
-                    </div>
+                    <a class="nav_link" asp-area="Customer" asp-controller="Home" asp-action="Index"> <i class='bx bx-home nav_icon'></i> <span class="nav_name">Home</span> </a>
+                    <a class="nav_link" asp-area="Customer" asp-controller="Home" asp-action="List"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">List</span> </a>
+                    @if (User.IsInRole(SD.Manager) || User.IsInRole(SD.Admin))
+                    {
+                        <a class="nav_link" asp-area="Admin" asp-controller="Category" asp-action="Index"> <i class='bx bx-category nav_icon'></i> <span class="nav_name">Categories</span> </a>
+                        <a class="nav_link" asp-area="Admin" asp-controller="Service" asp-action="Index"> <i class='bx bxs-car-mechanic nav_icon'></i> <span class="nav_name">Products</span> </a>
+                        <a class="nav_link" asp-area="Admin" asp-controller="Order" asp-action="Index"> <i class='bx bxs-credit-card-alt nav_icon'></i> <span class="nav_name">Orders</span> </a>
+                    }
+
+                    @if (User.IsInRole(SD.Admin))
+                    {
+                        <a class="nav_link" asp-area="Admin" asp-controller="User" asp-action="Index"> <i class='bx bx-user nav_icon'></i> <span class="nav_name">Users</span> </a>
+                    }
+
                 </div>
-            @*<a href="#" class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">SignOut</span> </a>
-            <a href="#" class="nav_link"> <i class='bx bx-log-in nav_icon'></i> <span class="nav_name"></span> </a>*@
+            </div>
+
         </nav>
     </div>
     <!--End Sidebar menu-->
-    <div class="container my-3"style="padding-top: 2em; padding-bottom: 2em;">
+    <div class="container my-3" style="padding-top: 2em; padding-bottom: 2em;">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
