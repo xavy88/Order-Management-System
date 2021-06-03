@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using OMS.DataAccess.Data.Repository.IRepository;
 using OMS.Models.ViewModel;
 using OMS.Utility;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 namespace OMS.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = SD.Admin + "," + SD.Manager)]
     public class OrderController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

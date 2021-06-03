@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using OMS.DataAccess.Data.Repository;
 using OMS.DataAccess.Data.Repository.IRepository;
 using OMS.Extensions;
@@ -13,6 +14,7 @@ using System.Threading.Tasks;
 namespace OMS.Areas.Customer.Controllers
 {
     [Area("Customer")]
+    [Authorize]
     public class CartController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
